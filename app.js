@@ -1,0 +1,12 @@
+// const fs = require('fs')
+// fs.writeFileSync('notes.txt', 'My Name is Abhijeet Kulshreshtha')
+// fs.appendFileSync('notes.txt', '. I live in Bangalore')
+
+// const add = require('./utils.js')
+// const sum = add(4, 5)
+// console.log(sum)
+const validator=require('validator')
+const getNotes = require('./notes.js')
+console.log(getNotes())
+console.log(validator.isEmail('abhijeet.abap%cbc.com'))
+console.log(validator.isURL('www.sap.com'))
