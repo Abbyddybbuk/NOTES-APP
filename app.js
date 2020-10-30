@@ -2,6 +2,7 @@ const validator = require('validator')
 const chalk = require('chalk')
 const yargs = require('yargs')
 const notes = require('./notes.js')
+const { argv } = require('yargs')
 // console.log(chalk.yellow.bold.inverse(getNotes()))
 // console.log(chalk.red(validator.isEmail('abhijeet.abap%cbc.com')))
 // console.log(chalk.blue.bold(validator.isURL('www.sap.com')))
@@ -34,7 +35,14 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
-    handler: () => console.log('Removing a note!')
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: () => notes.removeNote(argv.title)
 })
 
 // Create List command
