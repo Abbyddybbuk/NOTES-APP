@@ -6,7 +6,7 @@ const getNotes = () => 'Your notes are ready'
 const addNote = (title, body) => {
     const notes = loadNotes()
     console.log(notes)
-
+    debugger
     const duplicateNote = notes.find((note) => note.title === title)
 
     if (!duplicateNote) {
