@@ -6,9 +6,10 @@ const getNotes = () => 'Your notes are ready'
 const addNote = (title, body) => {
     const notes = loadNotes()
     console.log(notes)
-    const duplicateNotes = notes.filter((note) => note.title === title)
 
-    if (duplicateNotes.length === 0) {
+    const duplicateNote = notes.find((note) => note.title === title)
+
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
@@ -32,6 +33,17 @@ const removeNote = (title) => {
     }
 }
 
+const readNote = (title) => {
+    const notes = loadNotes()
+    const readNote1 =notes.find((note) => note.title === title)
+
+    if (readNote1 === undefined) {
+        console.log(chalk.red.bold.inverse('No Note Found'))
+    } else {
+        console.log(chalk.green.bold.inverse(readNote1.title) + ' ' + chalk.blue.bold.inverse(readNote1.body))
+    }
+}
+ 
 const listNotes = () => {
     const notes = loadNotes()
     console.log(chalk.bgMagenta.bold('All Stored Notes'))
@@ -60,5 +72,6 @@ module.exports = {
     getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 }
