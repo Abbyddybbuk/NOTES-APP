@@ -26,9 +26,7 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: (argv) => {
-        notes.addNote(argv.title, argv.body)
-    } 
+    handler: (argv) => notes.addNote(argv.title, argv.body) 
 })
 
 // Create Remove command
