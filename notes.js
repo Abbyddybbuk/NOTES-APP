@@ -6,23 +6,23 @@ const getNotes = () => 'Your notes are ready'
 const addNote = (title, body) => {
     const notes = loadNotes()
     console.log(notes)
-    const duplicateNotes = notes.filter((note) => note.title === title )
+    const duplicateNotes = notes.filter((note) => note.title === title)
 
     if (duplicateNotes.length === 0) {
         notes.push({
             title: title,
             body: body
-         })
-         
-         saveNotes(notes)      
+        })
+
+        saveNotes(notes)
     } else {
-       console.log('Note already exists!')
+        console.log('Note already exists!')
     }
 }
 
 const removeNote = (title) => {
-    const  notes = loadNotes()
-    const notesToKeep = notes.filter( (note) => note.title !== title )   
+    const notes = loadNotes()
+    const notesToKeep = notes.filter((note) => note.title !== title)
 
     if (notes.length === notesToKeep.length) {
         console.log(chalk.red.bold.inverse('No Note Found'))
@@ -32,14 +32,22 @@ const removeNote = (title) => {
     }
 }
 
+const listNotes = () => {
+    const notes = loadNotes()
+    console.log(chalk.bgMagenta.bold('All Stored Notes'))
+    notes.forEach((note) => {
+        console.log(chalk.yellow.bold(note.title) + ' ' + chalk.yellow.bold(note.body))
+    })
+}
+
 const saveNotes = (notes) => {
-   const dataJSON = JSON.stringify(notes)
-   fs.writeFileSync('notes.json', dataJSON)
+    const dataJSON = JSON.stringify(notes)
+    fs.writeFileSync('notes.json', dataJSON)
 }
 
 const loadNotes = () => {
     try {
-        const dataBuffer = fs.readFileSync('notes.json') 
+        const dataBuffer = fs.readFileSync('notes.json')
         // Convert the read JSON from machine format to readable JSON format
         const dataJSON = dataBuffer.toString()
         return JSON.parse(dataJSON)
@@ -51,5 +59,6 @@ const loadNotes = () => {
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 }
